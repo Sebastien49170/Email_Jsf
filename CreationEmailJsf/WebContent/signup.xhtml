@@ -13,13 +13,13 @@
 	<h:form>
 		<div>
 			<h:outputLabel for="email">Email Adress: </h:outputLabel>
-			<h:inputText id="email" value="#{userBean.email}" required="true"></h:inputText>
+			<h:inputText id="email" value="#{userBackingBean.user.email}" required="true"></h:inputText>
 		</div>
 		<div>
 			<h:outputLabel for="password">Password: </h:outputLabel>
-			<h:inputText id="password" value="#{userBean.password}"	required="true"></h:inputText>
+			<h:inputSecret id="password" value="#{userBackingBean.user.password}"	required="true"></h:inputSecret>
 		</div>
-		<h:commandButton value="Registration" action="viewUser" />
+		<h:commandButton value="Register" action="#{userBackingBean.showUserHome}" />
 	</h:form>
 </h:body>
 </html>

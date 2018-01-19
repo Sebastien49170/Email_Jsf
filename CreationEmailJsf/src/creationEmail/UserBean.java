@@ -1,15 +1,11 @@
 package creationEmail;
 
-import java.io.Serializable;
-
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
-public class UserBean implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class UserBean  {
 
 	private String password;
 	private String email;
