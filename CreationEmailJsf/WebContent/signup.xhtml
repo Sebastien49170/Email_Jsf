@@ -19,7 +19,7 @@
 			<h:outputLabel for="password">Password: </h:outputLabel>
 			<h:inputSecret id="password" value="#{userBackingBean.user.password}"	required="true"></h:inputSecret>
 		</div>
-		<h:commandButton value="Register" action="#{userBackingBean.showUserHome}" />
+		<h:commandButton value="Register" action="#{userBackingBean.registerUser()}" />
 	</h:form>
 </h:body>
 </html>

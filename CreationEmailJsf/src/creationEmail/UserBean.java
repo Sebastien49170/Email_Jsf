@@ -2,12 +2,27 @@ package creationEmail;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @ManagedBean
 @RequestScoped
+@Entity
+@Table
 public class UserBean  {
 
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long id;
+	
+	@Column
 	private String password;
+	
+	@Column
 	private String email;
 	
 	public UserBean(String password, String email) {
@@ -35,4 +50,14 @@ public class UserBean  {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+	
+	
 }
