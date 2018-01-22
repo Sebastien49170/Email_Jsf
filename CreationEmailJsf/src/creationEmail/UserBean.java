@@ -31,6 +31,11 @@ public class UserBean  {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return ("User:\n" + "email: "+ email + "\tpassword: " + password + "\n");
+	}
+
 	public UserBean() {
 		super();
 	}
