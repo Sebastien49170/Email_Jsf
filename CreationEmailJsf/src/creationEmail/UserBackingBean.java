@@ -58,10 +58,9 @@ public class UserBackingBean implements Serializable{
 	}
 	
 	public String editAccount(Long UserToEditId) {
-		this.user = userDao.editAccount(UserToEditId);
+		this.user = userDao.findUser(UserToEditId);
 		return "update";
 	}
-	
 	
 	public String updateAccount() {
 		userDao.updateAccount(this.user);

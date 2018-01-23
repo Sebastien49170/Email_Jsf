@@ -27,7 +27,7 @@ public class UserDao {
 		em.remove(userBeanToDelete);
 	}
 
-	public UserBean editAccount(Long UserToEditId) {
+	public UserBean findUser(Long UserToEditId) {
 		return em.find(UserBean.class, UserToEditId);
 	}
 
