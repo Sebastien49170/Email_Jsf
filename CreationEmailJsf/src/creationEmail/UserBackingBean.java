@@ -48,24 +48,7 @@ public class UserBackingBean implements Serializable{
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-
-	public void registerUser() {
-		System.out.println("register user " + user.getEmail());
-		userDao.registerUser(user);
-	}
 	
-	public String deleteUser(UserBean userToDelete) {
-		userDao.deleteUser(userToDelete);
-		userBeanList = userDao.showUser();
-		return "homeUser";
-	}
-
-	
-	public String showAllUsers() {
-		userBeanList = userDao.showUser();
-		return "homeUser";
-	}
-
 	public List<UserBean> getUserBeans() {
 		return userBeanList;
 	}
@@ -74,11 +57,35 @@ public class UserBackingBean implements Serializable{
 		this.userBeanList = userBeans;
 	}
 
-	public String showUserHome() {
-		System.out.println("User email: " + user.getEmail() +"\tpassword:" + user.getPassword());
-		return "homeUser";
+	//----------------Methods-----------------//
+	
+	public void registerUser() {
+		userDao.registerUser(user);
+	}
+	
+	public String deleteUser(Long id) {
+		userDao.deleteUsers(id);
+		return "usersManagement";
+	}
+	
+	public String showUser(UserBean user){
+	return "homeUser";
+	}
+	
+	public String showAllUsers() {
+		userBeanList = userDao.showUser();
+		return "usersManagement";
+	}
+	
+	public String editAccount(Long UserToEditId) {
+		this.user = userDao.editAccount(UserToEditId);
+		return "update";
+	}
+	
+	public String updateAccount() {
+		userDao.updateAccount(user);
+		return "signup";
 	}
 	
 	
-
 }

@@ -25,11 +25,6 @@
 		<div>
 		<h:commandButton value="List all users" action="#{userBackingBean.showAllUsers()}" />
 		</div>
-		<div>
-		<h:outputLabel for="email">Email Adress to delete: </h:outputLabel>
-			<h:inputText id="emailToDelete" value="#{userBackingBean.user.email}"></h:inputText>
-		<h:commandButton value="Delete" action="#{userBackingBean.deleteUser()}" />
-		</div>
 	</h:form>
 </h:body>
 </html>
