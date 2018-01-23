@@ -22,9 +22,9 @@
 		<div>
 		<h:commandButton value="Register" action="#{userBackingBean.registerUser()}" />
 		</div>
-		<div>
-		<h:commandButton value="List all users" action="#{userBackingBean.showAllUsers()}" />
-		</div>
 	</h:form>
+	<div>
+	<h:link value="List all users" outcome="usersManagement"/>
+	</div>
 </h:body>
 </html>

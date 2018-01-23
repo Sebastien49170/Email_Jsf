@@ -14,13 +14,11 @@ public class UserDao {
 	@PersistenceContext(unitName = "persistence-unit-h2")
 	private EntityManager em;
 
-	public String registerUser(UserBean user) {
+	public void registerUser(UserBean user) {
 		em.persist(user);
-		return "homeUser";
 	}
 
-
-	public List<UserBean> showUser() {
+	public List<UserBean> showAllUsers() {
 		return em.createQuery("select e from UserBean e").getResultList();
 	}
 
@@ -28,11 +26,11 @@ public class UserDao {
 		UserBean userBeanToDelete = em.find(UserBean.class, id);
 		em.remove(userBeanToDelete);
 	}
-	
+
 	public UserBean editAccount(Long UserToEditId) {
 		return em.find(UserBean.class, UserToEditId);
 	}
-	
+
 	public void updateAccount(UserBean user) {
 		em.merge(user);
 	}

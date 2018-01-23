@@ -16,15 +16,15 @@ import javax.persistence.Table;
 public class UserBean  {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
+
 	@Column
 	private String password;
-	
+
 	@Column
 	private String email;
-	
+
 	public UserBean(String password, String email) {
 		super();
 		this.password = password;
@@ -39,19 +39,19 @@ public class UserBean  {
 	public UserBean() {
 		super();
 	}
-	
+
 	public String getPassword() {
 		return password;
 	}
-	
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -63,6 +63,4 @@ public class UserBean  {
 	public void setId(long id) {
 		this.id = id;
 	}
-	
-	
 }

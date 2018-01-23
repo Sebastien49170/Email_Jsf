@@ -18,18 +18,11 @@ public class UserBackingBean implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private UserBean user;
-	private List<UserBean> userBeanList;
-	
+
 	@EJB
 	private UserDao userDao;
-	
-	 @PostConstruct
-	    public void init() {
-		 userBeanList = userDao.showUser();
-	    }
-	
+
 	public UserBackingBean() {
-		super();
 		user = new UserBean();
 	}
 
@@ -48,32 +41,19 @@ public class UserBackingBean implements Serializable{
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
-	
-	public List<UserBean> getUserBeans() {
-		return userBeanList;
-	}
-
-	public void setUserBeans(List<UserBean> userBeans) {
-		this.userBeanList = userBeans;
-	}
 
 	//----------------Methods-----------------//
 	
 	public void registerUser() {
 		userDao.registerUser(user);
 	}
-	
+
+	public List<UserBean> showAllUsers() {
+		return userDao.showAllUsers();
+	}
+		
 	public String deleteUser(Long id) {
 		userDao.deleteUsers(id);
-		return "usersManagement";
-	}
-	
-	public String showUser(UserBean user){
-	return "homeUser";
-	}
-	
-	public String showAllUsers() {
-		userBeanList = userDao.showUser();
 		return "usersManagement";
 	}
 	
@@ -82,10 +62,9 @@ public class UserBackingBean implements Serializable{
 		return "update";
 	}
 	
+	
 	public String updateAccount() {
-		userDao.updateAccount(user);
-		return "signup";
+		userDao.updateAccount(this.user);
+		return "usersManagement";
 	}
-	
-	
 }
