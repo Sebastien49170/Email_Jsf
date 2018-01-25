@@ -4,6 +4,7 @@ import javax.ejb.EJB;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -21,35 +22,35 @@ public class UserService {
 	TrackDao trackDao;
 
 	@GET
-	@Path("/show")
+	@Path("/show/{id}")
 	@Produces("application/json")
-	public String show(@QueryParam("id")long id) {
+	public String show(@PathParam("id")long id) {
 		UserBean user;
 		user = userDao.findUser(id);
 		return user.getEmail();
 	}
 
 	@DELETE
-	@Path("/delete")
+	@Path("/delete/{id}")
 	@Produces("application/json")
-	public void delete(@QueryParam("id")long id) {
+	public void delete(@PathParam("id")long id) {
 		userDao.deleteUsers(id);
 	}
 
 	@POST
-	@Path("/create")
+	@Path("/create/{email}/{password}")
 	@Produces("application/json")
-	public void create(@QueryParam("email") String email, @QueryParam("password") String password ) {
+	public void create(@PathParam("email") String email, @PathParam("password") String password ) {
 		UserBean user= new UserBean();
 		user.setEmail(email);
 		user.setPassword(password);
 		userDao.registerUser(user);
 	}
 
-	@POST
-	@Path("/update")
+	@PUT
+	@Path("/update/{id}/{email}/{password}")
 	@Produces("application/json")
-	public void update(@QueryParam("id")long id, @QueryParam("email") String email, @QueryParam("password") String password ) {
+	public void update(@PathParam("id")long id, @PathParam("email") String email, @PathParam("password") String password ) {
 		UserBean user= userDao.findUser(id);
 		user.setEmail(email);
 		user.setPassword(password);
@@ -71,5 +72,12 @@ public class UserService {
 		userDao.addToUser(userId, trackId);
 	}
 	
-
+	@DELETE
+	   @Path("/tracklist/delete/{trackId}/{userId}")
+	   @Produces("application/json")
+	   public void delete(@PathParam("trackId") long trackId, @PathParam("userId") long userId) {
+	       UserBean user;
+	       user = userDao.findUser(userId);
+	       userDao.deleteTrackFromUser(trackId, user);
+	   }
 }

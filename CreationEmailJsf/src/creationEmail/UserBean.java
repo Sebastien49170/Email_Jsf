@@ -16,10 +16,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import track.Track;
 
-@ManagedBean
-@RequestScoped
+//@ManagedBean
+//@RequestScoped
 @Entity
-@Table
+//@Table
 public class UserBean  {
 
 	@Id

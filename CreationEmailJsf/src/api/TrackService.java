@@ -5,6 +5,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
@@ -18,24 +19,24 @@ public class TrackService {
 	TrackDao trackDao;
 
 	@GET
-	@Path("/show")
+	@Path("/show/{id}")
 	@Produces("application/json")
-	public String show(@QueryParam("id")long id) {
+	public String show(@PathParam("id")long id) {
 		Track track;
 		track = trackDao.findTrack(id);
 		return track.toString();
 	}
 
 	@DELETE
-	@Path("/delete")
+	@Path("/delete/{id}")
 	@Produces("application/json")
-	public void delete(@QueryParam("id")long id) {
+	public void delete(@PathParam("id")long id) {
 		trackDao.deleteTrack(id);
 	}
 
 	@POST
-	@Path("/add")
-	public void add(@QueryParam("title") String title, @QueryParam("artist") String artist) {
+	@Path("/add/{title}/{artist}")
+	public void add(@PathParam("title") String title, @PathParam("artist") String artist) {
 		Track track= new Track();
 		track.setArtist(artist);
 		track.setTitle(title);
@@ -43,9 +44,9 @@ public class TrackService {
 	}
 
 	@POST
-	@Path("/update")
+	@Path("/update/{id}/{title}/{artist}")
 	@Produces("application/json")
-	public void update(@QueryParam("id")long id, @QueryParam("title") String title, @QueryParam("artist") String artist) {
+	public void update(@PathParam("id")long id, @PathParam("title") String title, @PathParam("artist") String artist) {
 		Track track= trackDao.findTrack(id);
 		track.setTitle(title);
 		track.setArtist(artist);

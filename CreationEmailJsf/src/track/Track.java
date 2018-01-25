@@ -13,10 +13,10 @@ import javax.persistence.Table;
 
 import creationEmail.UserBean;
 
-@ManagedBean
-@RequestScoped
+//@ManagedBean
+//@RequestScoped
 @Entity
-@Table
+//@Table
 public class Track {
 
 	@Id

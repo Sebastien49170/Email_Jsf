@@ -47,12 +47,21 @@ public class UserDao {
 		userToAddTrack.getTracks().add(trackToAddUser);
 		trackToAddUser.setUser(userToAddTrack);
 		em.persist(userToAddTrack);
-		for(Track track1 : userToAddTrack.getTracks()) {
-			System.out.println(track1 +  userToAddTrack.toString());
-		}
 	}
-
+	
 	public List<Track>showUserTraks(UserBean userShowTracks){
 		return userShowTracks.getTracks();
+	}
+
+	public void deleteTrackFromUser(Long trackId, UserBean user) {
+		int indexTrack=0;
+		for (Track track : user.getTracks()) {
+			if (track.getId()== trackId) {
+				indexTrack= user.getTracks().indexOf(track);
+			}
+		}        
+		user.getTracks().remove(indexTrack);
+		trackDao.findTrack(trackId).setUser(null);
+		em.merge(user);
 	}
 }
