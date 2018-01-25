@@ -1,14 +1,20 @@
 package track;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import creationEmail.UserBean;
 
+@ManagedBean
+@RequestScoped
 @Entity
 @Table
 public class Track {
@@ -19,17 +25,21 @@ public class Track {
 
 	@Column
 	private String title;
+	
+	@Column
+	private String artist;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	private UserBean user;
 
 	public Track() {
 	
 	}
-
-	@Column
-	private String artist;
-
-	public Track(long id, String title, String artist) {
+ 
+	public Track(long id, String title, UserBean user, String artist) {
 		this.id = id;
 		this.title = title;
+		this.user = user;
 		this.artist = artist;
 	}
 
@@ -55,6 +65,14 @@ public class Track {
 
 	public void setArtist(String artist) {
 		this.artist = artist;
+	}
+		
+	public UserBean getUser() {
+		return user;
+	}
+
+	public void setUser(UserBean user) {
+		this.user = user;
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class TrackService {
 
 	@EJB
 	TrackDao trackDao;
-	
+
 	@GET
 	@Path("/show")
 	@Produces("application/json")
@@ -25,14 +25,14 @@ public class TrackService {
 		track = trackDao.findTrack(id);
 		return track.toString();
 	}
-	
+
 	@DELETE
 	@Path("/delete")
 	@Produces("application/json")
 	public void delete(@QueryParam("id")long id) {
 		trackDao.deleteTrack(id);
 	}
-	
+
 	@POST
 	@Path("/add")
 	public void add(@QueryParam("title") String title, @QueryParam("artist") String artist) {
@@ -41,7 +41,7 @@ public class TrackService {
 		track.setTitle(title);
 		trackDao.addTrack(track);
 	}
-	
+
 	@POST
 	@Path("/update")
 	@Produces("application/json")

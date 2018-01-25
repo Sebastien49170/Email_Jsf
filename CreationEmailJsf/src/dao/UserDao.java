@@ -3,16 +3,22 @@ package dao;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import creationEmail.UserBean;
+import track.Track;
 
 @Stateless
 public class UserDao {
 
+
 	@PersistenceContext(unitName = "persistence-unit-h2")
 	private EntityManager em;
+
+	@EJB
+	TrackDao trackDao;
 
 	public void registerUser(UserBean user) {
 		em.persist(user);
@@ -33,5 +39,20 @@ public class UserDao {
 
 	public void updateAccount(UserBean user) {
 		em.merge(user);
+	}
+
+	public void addToUser(Long userId, Long trackId) {
+		UserBean userToAddTrack = findUser(userId);
+		Track trackToAddUser = trackDao.findTrack(trackId);
+		userToAddTrack.getTracks().add(trackToAddUser);
+		trackToAddUser.setUser(userToAddTrack);
+		em.persist(userToAddTrack);
+		for(Track track1 : userToAddTrack.getTracks()) {
+			System.out.println(track1 +  userToAddTrack.toString());
+		}
+	}
+
+	public List<Track>showUserTraks(UserBean userShowTracks){
+		return userShowTracks.getTracks();
 	}
 }

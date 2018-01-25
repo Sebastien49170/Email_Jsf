@@ -20,11 +20,15 @@
 			<h:inputSecret id="password" value="#{userBackingBean.user.password}"></h:inputSecret>
 		</div>
 		<div>
-		<h:commandButton value="Register" action="#{userBackingBean.registerUser()}" />
+			<h:commandButton value="Register"
+				action="#{userBackingBean.registerUser()}" />
 		</div>
 	</h:form>
 	<div>
-	<h:link value="List all users" outcome="usersManagement"/>
+		<h:link value="List all users" outcome="usersManagement" />
+	</div>
+	<div>
+		<h:link value="List all tracks" outcome="trackManagement" />
 	</div>
 </h:body>
 </html>

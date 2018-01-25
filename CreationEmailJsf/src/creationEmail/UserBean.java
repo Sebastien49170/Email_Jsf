@@ -1,13 +1,20 @@
 package creationEmail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import track.Track;
 
 @ManagedBean
 @RequestScoped
@@ -25,10 +32,17 @@ public class UserBean  {
 	@Column
 	private String email;
 
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	private List<Track> tracks = new ArrayList<Track>();
+
 	public UserBean(String password, String email) {
 		super();
 		this.password = password;
 		this.email = email;
+	}
+
+	public UserBean() {
+		super();
 	}
 
 	@Override
@@ -36,8 +50,12 @@ public class UserBean  {
 		return ("User:\n" + "email: "+ email + "\tpassword: " + password + "\n");
 	}
 
-	public UserBean() {
-		super();
+	public List<Track> getTracks() {
+		return tracks;
+	}
+
+	public void setTracks(List<Track> tracks) {
+		this.tracks = tracks;
 	}
 
 	public String getPassword() {

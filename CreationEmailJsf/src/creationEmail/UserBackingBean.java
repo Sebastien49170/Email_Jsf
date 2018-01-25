@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 
 import dao.UserDao;
+import track.Track;
 
 @ManagedBean
 @RequestScoped
@@ -33,7 +34,7 @@ public class UserBackingBean implements Serializable{
 	public UserBean getUser() {
 		return user;
 	}
-			
+
 	public UserDao getUserDao() {
 		return userDao;
 	}
@@ -43,7 +44,7 @@ public class UserBackingBean implements Serializable{
 	}
 
 	//----------------Methods-----------------//
-	
+
 	public void registerUser() {
 		userDao.registerUser(user);
 	}
@@ -51,19 +52,38 @@ public class UserBackingBean implements Serializable{
 	public List<UserBean> showAllUsers() {
 		return userDao.showAllUsers();
 	}
-		
+
 	public String deleteUser(Long id) {
 		userDao.deleteUsers(id);
 		return "usersManagement";
 	}
-	
+
 	public String editAccount(Long UserToEditId) {
 		this.user = userDao.findUser(UserToEditId);
 		return "update";
 	}
-	
+
 	public String updateAccount() {
 		userDao.updateAccount(this.user);
 		return "usersManagement";
+	}
+
+	public String editAccountTrack(Long UserToEditId) {
+		this.user = userDao.findUser(UserToEditId);
+		return "userTrackManagement";
+	}
+
+	public void addToUser(Long userId, Track track) {
+		userDao.addToUser(userId,track.getId());
+
+	}
+
+	public String findUserTraks(Long userId){
+		this.user=userDao.findUser(userId);
+		return "userTracksView";
+	}
+
+	public List<Track> showUserTraks(){
+		return userDao.showUserTraks(this.user);
 	}
 }

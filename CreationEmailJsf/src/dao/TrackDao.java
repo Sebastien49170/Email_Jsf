@@ -6,11 +6,12 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import creationEmail.UserBean;
 import track.Track;
 
 @Stateless
 public class TrackDao{
-	
+
 	@PersistenceContext(unitName = "persistence-unit-h2")
 	private EntityManager em;
 
@@ -36,8 +37,9 @@ public class TrackDao{
 		em.merge(track);
 	}
 
-	
-	
+	public List<Track> showAllTrack() {
+		return em.createQuery("select e from Track e").getResultList();
+	}
 }
 
 

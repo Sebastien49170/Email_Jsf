@@ -5,17 +5,21 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
 import creationEmail.UserBean;
+import dao.TrackDao;
 import dao.UserDao;
 
 @Path("user")
 public class UserService {
 	@EJB
 	UserDao userDao;
-	
+	@EJB
+	TrackDao trackDao;
+
 	@GET
 	@Path("/show")
 	@Produces("application/json")
@@ -24,14 +28,14 @@ public class UserService {
 		user = userDao.findUser(id);
 		return user.getEmail();
 	}
-	
+
 	@DELETE
 	@Path("/delete")
 	@Produces("application/json")
 	public void delete(@QueryParam("id")long id) {
 		userDao.deleteUsers(id);
 	}
-	
+
 	@POST
 	@Path("/create")
 	@Produces("application/json")
@@ -41,7 +45,7 @@ public class UserService {
 		user.setPassword(password);
 		userDao.registerUser(user);
 	}
-	
+
 	@POST
 	@Path("/update")
 	@Produces("application/json")
@@ -51,4 +55,13 @@ public class UserService {
 		user.setPassword(password);
 		userDao.updateAccount(user);
 	}
+
+	@GET
+	@Path("/tracklist/show/{id}")
+	@Produces("application/json")
+	public String update(@PathParam("id")long id) {
+		UserBean user= userDao.findUser(id);
+		return user.getTracks().toString();
+	}
+
 }
