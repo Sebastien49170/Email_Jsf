@@ -59,9 +59,17 @@ public class UserService {
 	@GET
 	@Path("/tracklist/show/{id}")
 	@Produces("application/json")
-	public String update(@PathParam("id")long id) {
+	public String showtracks(@PathParam("id")long id) {
 		UserBean user= userDao.findUser(id);
 		return user.getTracks().toString();
 	}
+	
+	@POST
+	@Path("/tracklist/add/{userId}/{trackId}")
+	@Produces("application/json")
+	public void addTrack(@PathParam("userId")long userId,@PathParam("trackId")long trackId) {
+		userDao.addToUser(userId, trackId);
+	}
+	
 
 }
